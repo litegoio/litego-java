@@ -28,7 +28,7 @@ and then add to pom.xml
     <dependency>
         <groupId>io.litego</groupId>
         <artifactId>litego-java</artifactId>
-        <version>0.2</version>
+        <version>0.3</version>
     </dependency>
 </dependencies>
 ```
@@ -64,7 +64,13 @@ ChargeResponse chargeResponse = litego.createCharge(authToken, description, amou
 
 Charges list 
 ```java
-PaginatedListResponse<ChargeResponse> chargeList = litego.chargesList(authToken, isPaid, page, pageSize);
+ChargeRequest request = new ChargeRequest();
+request.setMaxAmount(Optional.of(5000L));
+PaginatedListResponse<ChargeResponse> chargeList = litego.getListCharges(authToken, request);
+```
+or
+```java
+PaginatedListResponse<ChargeResponse> chargeList = litego.getListCharges(authToken);
 ```
 
 Get charge
@@ -93,6 +99,14 @@ WithdrawalTransactionResponse transaction = litego.withdrawManually(authToken);
 ```
 
 Withdrawals list
+```java
+WithdrawalTransactionRequest request = new WithdrawalTransactionRequest();
+request.setMaxAmount(Optional.of(5000L));
+PaginatedListResponse<WithdrawalTransactionResponse> withdrawalList = litego.getListWithdrawals(authToken, request);
+```
+
+or
+
 ```java
 PaginatedListResponse<WithdrawalTransactionResponse> withdrawalList = litego.getListWithdrawals(authToken);
 ```

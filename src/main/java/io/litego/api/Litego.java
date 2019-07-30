@@ -12,10 +12,9 @@ import okhttp3.*;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class Litego {
     final static private String AUTHENTICATE = "/api/v1/merchant/authenticate";
@@ -81,6 +80,7 @@ public class Litego {
         return gson.fromJson(response.body().string(), NotificationResponse.class);
     }
 
+    @Deprecated
     public PaginatedListResponse<WithdrawalTransactionResponse> getListWithdrawals(String token, Status status, int page, int pageSize) throws Exception {
         String url = String.format("%s?status=%s&page=%d&page_size=%d", LIST_WITHDRAWALS, status.name().toLowerCase(), page, pageSize);
         Response response = doGetRequestAuth(token, url);
@@ -96,6 +96,7 @@ public class Litego {
         return gson.fromJson(response.body().string(), listType);
     }
 
+    @Deprecated
     public PaginatedListResponse<WithdrawalTransactionResponse> getListWithdrawals(String token, Status status) throws Exception {
         String url = String.format("%s?status=%s", LIST_WITHDRAWALS, status.name().toLowerCase());
         Response response = doGetRequestAuth(token, url);
@@ -104,8 +105,32 @@ public class Litego {
         return gson.fromJson(response.body().string(), listType);
     }
 
+    @Deprecated
     public PaginatedListResponse<WithdrawalTransactionResponse> getListWithdrawals(String token, int page, int pageSize) throws Exception {
         String url = String.format("%s?page=%d&page_size=%d", LIST_WITHDRAWALS, page, pageSize);
+        Response response = doGetRequestAuth(token, url);
+        checkResponseError(response);
+        Type listType = new TypeToken<PaginatedListResponse<WithdrawalTransactionResponse>>() {}.getType();
+        return gson.fromJson(response.body().string(), listType);
+    }
+    public PaginatedListResponse<WithdrawalTransactionResponse> getListWithdrawals(String token, WithdrawalTransactionRequest parameters) throws Exception {
+        List<Optional<String>> optionals = new LinkedList<Optional<String>>() {{
+            add(parameters.getStatus().map(value -> "status=" + value));
+            add(parameters.getPage().map(value -> "page=" + value.toString()));
+            add(parameters.getPageSize().map(value -> "page_size=" + value.toString()));
+            add(parameters.getAddress().map(value -> "address=" + value));
+            add(parameters.getType().map(value -> "type=" + value));
+            add(parameters.getStartCreatedAt().map(value -> "start_created_at=" + value.toString()));
+            add(parameters.getEndCreatedAt().map(value -> "end_created_at=" + value.toString()));
+            add(parameters.getMinAmount().map(value -> "min_amount=" + value.toString()));
+            add(parameters.getMaxAmount().map(value -> "max_amount=" + value.toString()));
+            add(parameters.getStartChangedAt().map(value -> "start_changed_at=" + value));
+            add(parameters.getEndChangedAt().map(value -> "end_changed_at=" + value.toString()));
+            add(parameters.getSortBy().map(value -> "sort_by=" + value));
+            add(parameters.getAscending().map(value -> "ascending=" + value.toString()));
+        }};
+        optionals.removeIf(value -> !value.isPresent());
+        String url = LIST_WITHDRAWALS + "?" + optionals.stream().map(Optional::get).collect(Collectors.joining("&"));
         Response response = doGetRequestAuth(token, url);
         checkResponseError(response);
         Type listType = new TypeToken<PaginatedListResponse<WithdrawalTransactionResponse>>() {}.getType();
@@ -160,7 +185,7 @@ public class Litego {
         checkResponseError(response);
         return gson.fromJson(response.body().string(), ChargeResponse.class);
     }
-
+    @Deprecated
     public PaginatedListResponse<ChargeResponse> chargesList(String token, boolean isPaid, int page, int pageSize) throws Exception {
         String url = String.format("%s?paidOnly=%b&page=%d&pageSize=%d", CHARGES, isPaid, page, pageSize);
         Response response = doGetRequestAuth(token, url);
@@ -168,14 +193,14 @@ public class Litego {
         Type listType = new TypeToken<PaginatedListResponse<ChargeResponse>>() {}.getType();
         return gson.fromJson(response.body().string(), listType);
     }
-
+    @Deprecated
     public PaginatedListResponse<ChargeResponse> chargesList(String token) throws Exception {
         Response response = doGetRequestAuth(token, CHARGES);
         checkResponseError(response);
         Type listType = new TypeToken<PaginatedListResponse<ChargeResponse>>() {}.getType();
         return gson.fromJson(response.body().string(), listType);
     }
-
+    @Deprecated
     public PaginatedListResponse<ChargeResponse> chargesList(String token, boolean isPaid) throws Exception {
         String url = String.format("%s?paidOnly=%b", CHARGES, isPaid);
         Response response = doGetRequestAuth(token, url);
@@ -183,9 +208,38 @@ public class Litego {
         Type listType = new TypeToken<PaginatedListResponse<ChargeResponse>>() {}.getType();
         return gson.fromJson(response.body().string(), listType);
     }
-
+    @Deprecated
     public PaginatedListResponse<ChargeResponse> chargesList(String token, int page, int pageSize) throws Exception {
         String url = String.format("%s?page=%d&pageSize=%d", CHARGES, page, pageSize);
+        Response response = doGetRequestAuth(token, url);
+        checkResponseError(response);
+        Type listType = new TypeToken<PaginatedListResponse<ChargeResponse>>() {}.getType();
+        return gson.fromJson(response.body().string(), listType);
+    }
+
+    public PaginatedListResponse<ChargeResponse> getListCharges(String token) throws Exception {
+        Response response = doGetRequestAuth(token, CHARGES);
+        checkResponseError(response);
+        Type listType = new TypeToken<PaginatedListResponse<ChargeResponse>>() {}.getType();
+        return gson.fromJson(response.body().string(), listType);
+    }
+
+    public PaginatedListResponse<ChargeResponse> getListCharges(String token, ChargeRequest parameters) throws Exception {
+        List<Optional<String>> urlParameters = new LinkedList<Optional<String>>() {{
+            add(parameters.getIsPaid().map(value -> "paidOnly=" + value.toString()));
+            add(parameters.getPage().map(value -> "page=" + value.toString()));
+            add(parameters.getPageSize().map(value -> "pageSize=" + value.toString()));
+            add(parameters.getStartDate().map(value -> "startDate=" + value.toString()));
+            add(parameters.getEndDate().map(value -> "endDate=" + value.toString()));
+            add(parameters.getMinAmount().map(value -> "minAmount=" + value.toString()));
+            add(parameters.getMaxAmount().map(value -> "maxAmount=" + value.toString()));
+            add(parameters.getMinAmountPaid().map(value -> "minAmountPaid=" + value.toString()));
+            add(parameters.getMaxAmountPaid().map(value -> "maxAmountPaid=" + value.toString()));
+            add(parameters.getSortBy().map(value -> "sortBy=" + value));
+            add(parameters.getAscending().map(value -> "ascending=" + value.toString()));
+        }};
+        urlParameters.removeIf(value -> !value.isPresent());
+        String url = CHARGES + "?" + urlParameters.stream().map(Optional::get).collect(Collectors.joining("&"));
         Response response = doGetRequestAuth(token, url);
         checkResponseError(response);
         Type listType = new TypeToken<PaginatedListResponse<ChargeResponse>>() {}.getType();
