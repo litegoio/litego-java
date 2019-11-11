@@ -3,106 +3,106 @@ package io.litego.api.model;
 import java.util.Optional;
 
 public class ChargeRequest {
-    private Optional<Boolean> isPaid = Optional.empty();
-    private Optional<Long> page = Optional.empty();
-    private Optional<Long> pageSize = Optional.empty();
-    private Optional<Long> startDate = Optional.empty();
-    private Optional<Long> endDate = Optional.empty();
-    private Optional<Long> minAmount = Optional.empty();
-    private Optional<Long> maxAmount = Optional.empty();
-    private Optional<Long> minAmountPaid = Optional.empty();
-    private Optional<Long> maxAmountPaid = Optional.empty();
-    private Optional<String> sortBy = Optional.empty();
-    private Optional<Boolean> ascending = Optional.empty();
+    private Boolean isPaid;
+    private Long page;
+    private Long pageSize;
+    private Long startDate;
+    private Long endDate;
+    private Long minAmount;
+    private Long maxAmount;
+    private Long minAmountPaid;
+    private Long maxAmountPaid;
+    private String sortBy;
+    private Boolean ascending;
 
     public ChargeRequest() {
     }
 
     public Optional<Boolean> getIsPaid() {
-        return isPaid;
+        return Optional.ofNullable(isPaid);
     }
 
-    public void setIsPaid(Optional<Boolean> isPaid) {
+    public void setIsPaid(Boolean isPaid) {
         this.isPaid = isPaid;
     }
 
     public Optional<Long> getPage() {
-        return page;
+        return Optional.ofNullable(page);
     }
 
-    public void setPage(Optional<Long> page) {
+    public void setPage(Long page) {
         this.page = page;
     }
 
     public Optional<Long> getPageSize() {
-        return pageSize;
+        return Optional.ofNullable(pageSize);
     }
 
-    public void setPageSize(Optional<Long> pageSize) {
+    public void setPageSize(Long pageSize) {
         this.pageSize = pageSize;
     }
 
     public Optional<Long> getStartDate() {
-        return startDate;
+        return Optional.ofNullable(startDate);
     }
 
-    public void setStartDate(Optional<Long> startDate) {
+    public void setStartDate(Long startDate) {
         this.startDate = startDate;
     }
 
     public Optional<Long> getEndDate() {
-        return endDate;
+        return Optional.ofNullable(endDate);
     }
 
-    public void setEndDate(Optional<Long> endDate) {
+    public void setEndDate(Long endDate) {
         this.endDate = endDate;
     }
 
     public Optional<Long> getMinAmount() {
-        return minAmount;
+        return Optional.ofNullable(minAmount);
     }
 
-    public void setMinAmount(Optional<Long> minAmount) {
+    public void setMinAmount(Long minAmount) {
         this.minAmount = minAmount;
     }
 
     public Optional<Long> getMaxAmount() {
-        return maxAmount;
+        return Optional.ofNullable(maxAmount);
     }
 
-    public void setMaxAmount(Optional<Long> maxAmount) {
+    public void setMaxAmount(Long maxAmount) {
         this.maxAmount = maxAmount;
     }
 
     public Optional<Long> getMinAmountPaid() {
-        return minAmountPaid;
+        return Optional.ofNullable(minAmountPaid);
     }
 
-    public void setMinAmountPaid(Optional<Long> minAmountPaid) {
+    public void setMinAmountPaid(Long minAmountPaid) {
         this.minAmountPaid = minAmountPaid;
     }
 
     public Optional<Long> getMaxAmountPaid() {
-        return maxAmountPaid;
+        return Optional.ofNullable(maxAmountPaid);
     }
 
-    public void setMaxAmountPaid(Optional<Long> maxAmountPaid) {
+    public void setMaxAmountPaid(Long maxAmountPaid) {
         this.maxAmountPaid = maxAmountPaid;
     }
 
     public Optional<String> getSortBy() {
-        return sortBy;
+        return Optional.ofNullable(sortBy);
     }
 
-    public void setSortBy(Optional<String> sortBy) {
+    public void setSortBy(String sortBy) {
         this.sortBy = sortBy;
     }
 
     public Optional<Boolean> getAscending() {
-        return ascending;
+        return Optional.ofNullable(ascending);
     }
 
-    public void setAscending(Optional<Boolean> ascending) {
+    public void setAscending(Boolean ascending) {
         this.ascending = ascending;
     }
 }

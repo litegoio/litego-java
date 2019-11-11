@@ -28,7 +28,7 @@ and then add to pom.xml
     <dependency>
         <groupId>io.litego</groupId>
         <artifactId>litego-java</artifactId>
-        <version>0.3</version>
+        <version>0.4</version>
     </dependency>
 </dependencies>
 ```
@@ -65,7 +65,7 @@ ChargeResponse chargeResponse = litego.createCharge(authToken, description, amou
 Charges list 
 ```java
 ChargeRequest request = new ChargeRequest();
-request.setMaxAmount(Optional.of(5000L));
+request.setMaxAmount(5000L);
 PaginatedListResponse<ChargeResponse> chargeList = litego.getListCharges(authToken, request);
 ```
 or
@@ -101,7 +101,7 @@ WithdrawalTransactionResponse transaction = litego.withdrawManually(authToken);
 Withdrawals list
 ```java
 WithdrawalTransactionRequest request = new WithdrawalTransactionRequest();
-request.setMaxAmount(Optional.of(5000L));
+request.setMaxAmount(5000L);
 PaginatedListResponse<WithdrawalTransactionResponse> withdrawalList = litego.getListWithdrawals(authToken, request);
 ```
 
@@ -168,7 +168,22 @@ TransferResponse transferResponse = litego.getTransfer(authToken, transferId, Cu
 
 Get transfers
 ```java
-PaginatedListResponse<TransferResponse> chargeListResponse = litego.getTransfers(authToken, Currency.EOS);
+PaginatedListResponse<TransferResponse> transferListResponse = litego.getTransfers(authToken, Currency.EOS);
+```
+
+or
+
+```java
+EosTransfersRequest request = new EosTransfersRequest();
+request.setMaxAmount(0.5D);
+PaginatedListResponse<TransferResponse> transferListResponse = litego.getTransfers(authToken, request);
+```
+or 
+
+```java
+BtcTransfersRequest request = new BtcTransfersRequest();
+request.setMaxAmount(4000L);
+PaginatedListResponse<TransferResponse> transferListResponse = litego.getTransfers(authToken, request);
 ```
 
 Get wallet balance

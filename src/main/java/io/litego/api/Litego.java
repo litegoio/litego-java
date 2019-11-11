@@ -339,6 +339,30 @@ public class Litego {
         return gson.fromJson(response.body().string(), listType);
     }
 
+    public PaginatedListResponse<TransferResponse> getTransfers(String token, TransferRequest parameters) throws Exception {
+        List<Optional<String>> optionals = new LinkedList<Optional<String>>() {{
+            add(parameters.getPage().map(value -> "page=" + value.toString()));
+            add(parameters.getPageSize().map(value -> "page_size=" + value.toString()));
+            add(parameters.getStatus().map(value -> "status=" + value));
+            add(parameters.getDirection().map(value -> "direction=" + value));
+            add(parameters.getMinAmount().map(value -> "min_amount=" + value.toString()));
+            add(parameters.getMaxAmount().map(value -> "max_amount=" + value.toString()));
+            add(parameters.getStartCreatedAt().map(value -> "start_created_at=" + value.toString()));
+            add(parameters.getEndCreatedAt().map(value -> "end_created_at=" + value.toString()));
+            add(parameters.getStartStatusChangedAt().map(value -> "start_status_changed_at=" + value));
+            add(parameters.getEndStatusChangedAt().map(value -> "end_status_changed_at=" + value.toString()));
+            add(parameters.getSortBy().map(value -> "sort_by=" + value));
+            add(parameters.getAscending().map(value -> "ascending=" + value.toString()));
+        }};
+        optionals.removeIf(value -> !value.isPresent());
+        String subUrl = createSubUrl(WALLET_TRANSFER, "currency", parameters.getCurrency().name());
+        String url = subUrl + "?" + optionals.stream().map(Optional::get).collect(Collectors.joining("&"));
+        Response response = doGetRequestAuth(token, url);
+        checkResponseError(response);
+        Type listType = new TypeToken<PaginatedListResponse<TransferResponse>>() {}.getType();
+        return gson.fromJson(response.body().string(), listType);
+    }
+
     public WalletBalanceResponse getWalletBalance(String token, Currency currency) throws Exception {
         String subUrl = createSubUrl(WALLENT_BALANCE, "currency", currency.name());
         Response response = doGetRequestAuth(token, subUrl);

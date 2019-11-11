@@ -3,124 +3,124 @@ package io.litego.api.model;
 import java.util.Optional;
 
 public class WithdrawalTransactionRequest {
-    private Optional<String> status = Optional.empty();
-    private Optional<Long> page = Optional.empty();
-    private Optional<Long> pageSize = Optional.empty();
-    private Optional<String> address = Optional.empty();
-    private Optional<String> type = Optional.empty();
-    private Optional<Long> startCreatedAt = Optional.empty();
-    private Optional<Long> endCreatedAt = Optional.empty();
-    private Optional<Long> minAmount = Optional.empty();
-    private Optional<Long> maxAmount = Optional.empty();
-    private Optional<Long> startChangedAt = Optional.empty();
-    private Optional<Long> endChangedAt = Optional.empty();
-    private Optional<String> sortBy = Optional.empty();
-    private Optional<Boolean> ascending = Optional.empty();
+    private String status;
+    private Long page;
+    private Long pageSize;
+    private String address;
+    private String type;
+    private Long startCreatedAt;
+    private Long endCreatedAt;
+    private Long minAmount;
+    private Long maxAmount;
+    private Long startChangedAt;
+    private Long endChangedAt;
+    private String sortBy;
+    private Boolean ascending;
 
     public WithdrawalTransactionRequest() {
     }
 
     public Optional<String> getStatus() {
-        return status;
+        return Optional.ofNullable(status);
     }
 
-    public void setStatus(Optional<String> status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
     public Optional<Long> getPage() {
-        return page;
+        return Optional.ofNullable(page);
     }
 
-    public void setPage(Optional<Long> page) {
+    public void setPage(Long page) {
         this.page = page;
     }
 
     public Optional<Long> getPageSize() {
-        return pageSize;
+        return Optional.ofNullable(pageSize);
     }
 
-    public void setPageSize(Optional<Long> pageSize) {
+    public void setPageSize(Long pageSize) {
         this.pageSize = pageSize;
     }
 
     public Optional<String> getAddress() {
-        return address;
+        return Optional.ofNullable(address);
     }
 
-    public void setAddress(Optional<String> address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
     public Optional<String> getType() {
-        return type;
+        return Optional.ofNullable(type);
     }
 
-    public void setType(Optional<String> type) {
+    public void setType(String type) {
         this.type = type;
     }
 
     public Optional<Long> getStartCreatedAt() {
-        return startCreatedAt;
+        return Optional.ofNullable(startCreatedAt);
     }
 
-    public void setStartCreatedAt(Optional<Long> startCreatedAt) {
+    public void setStartCreatedAt(Long startCreatedAt) {
         this.startCreatedAt = startCreatedAt;
     }
 
     public Optional<Long> getEndCreatedAt() {
-        return endCreatedAt;
+        return Optional.ofNullable(endCreatedAt);
     }
 
-    public void setEndCreatedAt(Optional<Long> endCreatedAt) {
+    public void setEndCreatedAt(Long endCreatedAt) {
         this.endCreatedAt = endCreatedAt;
     }
 
     public Optional<Long> getMinAmount() {
-        return minAmount;
+        return Optional.ofNullable(minAmount);
     }
 
-    public void setMinAmount(Optional<Long> minAmount) {
+    public void setMinAmount(Long minAmount) {
         this.minAmount = minAmount;
     }
 
     public Optional<Long> getMaxAmount() {
-        return maxAmount;
+        return Optional.ofNullable(maxAmount);
     }
 
-    public void setMaxAmount(Optional<Long> maxAmount) {
+    public void setMaxAmount(Long maxAmount) {
         this.maxAmount = maxAmount;
     }
 
     public Optional<Long> getStartChangedAt() {
-        return startChangedAt;
+        return Optional.ofNullable(startChangedAt);
     }
 
-    public void setStartChangedAt(Optional<Long> startChangedAt) {
+    public void setStartChangedAt(Long startChangedAt) {
         this.startChangedAt = startChangedAt;
     }
 
     public Optional<Long> getEndChangedAt() {
-        return endChangedAt;
+        return Optional.ofNullable(endChangedAt);
     }
 
-    public void setEndChangedAt(Optional<Long> endChangedAt) {
+    public void setEndChangedAt(Long endChangedAt) {
         this.endChangedAt = endChangedAt;
     }
 
     public Optional<String> getSortBy() {
-        return sortBy;
+        return Optional.ofNullable(sortBy);
     }
 
-    public void setSortBy(Optional<String> sortBy) {
+    public void setSortBy(String sortBy) {
         this.sortBy = sortBy;
     }
 
     public Optional<Boolean> getAscending() {
-        return ascending;
+        return Optional.ofNullable(ascending);
     }
 
-    public void setAscending(Optional<Boolean> ascending) {
+    public void setAscending(Boolean ascending) {
         this.ascending = ascending;
     }
 }
